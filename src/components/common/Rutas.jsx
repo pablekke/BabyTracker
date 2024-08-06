@@ -4,7 +4,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Login } from '../login/Login'
 import { Registro } from '../login/Registro'
 
-
 export const Rutas = () => {
   return (
     <BrowserRouter>

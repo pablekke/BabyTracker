@@ -1,23 +1,31 @@
 import { URL_API } from "./consts";
 export const loginApi = async (data) => {
-  var myHeaders = new Headers();
+  const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
 
-  var raw = JSON.stringify({
+  const raw = JSON.stringify({
     usuario: data.user,
     password: data.password,
   });
 
-  var requestOptions = {
+  const requestOptions = {
     method: "POST",
     headers: myHeaders,
     body: raw,
     redirect: "follow",
   };
 
-  const response = await fetch(`${URL_API}/login.php`, requestOptions)
-    .then((response) => response.json())
-    .then((result) => result)
-    .catch((error) => error);
-  return response;
+  try {
+    const response = await fetch(`${URL_API}/login.php`, requestOptions);
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.mensaje || `Error: ${response.status}`);
+    }
+
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    throw new Error(error.message);
+  }
 };

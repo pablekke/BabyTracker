@@ -11,18 +11,18 @@ export const Login = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		const user = formLogin.user;
-		const password = formLogin.password;
+		const { user, password } = formLogin;
 		if (!user || !password) {
 			mostrarErrorToast('Rellene todos los campos');
-		} else {
-			try {
-				const response = await loginApi(formLogin);
-				PostUsuarioLocalStorage(response);
-				navigate('/');
-			} catch (ex) {
-				mostrarErrorToast(ex.mensaje)
-			}
+			return;
+		}
+
+		try {
+			const response = await loginApi({ user, password });
+			PostUsuarioLocalStorage(response);
+			navigate('/');
+		} catch (ex) {
+			mostrarErrorToast(ex.message);
 		}
 	}
 	const handleChange = (e) => {
