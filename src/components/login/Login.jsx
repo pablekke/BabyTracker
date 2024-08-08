@@ -19,6 +19,7 @@ export const Login = () => {
 
 		try {
 			const response = await loginApi({ user, password });
+			console.log('response', response.apiKey)
 			PostUsuarioLocalStorage(response);
 			navigate('/');
 		} catch (ex) {

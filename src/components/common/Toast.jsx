@@ -19,7 +19,7 @@ export const Toast = () => {
   );
 };
 
-export const mostrarErrorToast = (message) => {
+const mostrarErrorToast = (message) => {
   toast.error(message, {
     position: "bottom-center",
     autoClose: 5000,
@@ -32,3 +32,17 @@ export const mostrarErrorToast = (message) => {
     transition: Bounce,
   });
 };
+const mostrarSuccessToast = (message) => {
+  toast.success(message, {
+  position: "bottom-center",
+  autoClose: 5000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+  theme: "light",
+  transition: Bounce,
+  });
+}
+export {mostrarSuccessToast, mostrarErrorToast}

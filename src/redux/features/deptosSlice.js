@@ -11,11 +11,7 @@ const deptosSlice = createSlice({
     cargarDeptos: (state, action) => {
       const deptos = action.payload;
       state.deptos = [...deptos];
-    },
-    getDeptos: (state) => {
-      const deptos = state.deptos;
-      return [...deptos];
-    },
+    }
   },
 });
 export const { cargarDeptos, getDeptos } = deptosSlice.actions;

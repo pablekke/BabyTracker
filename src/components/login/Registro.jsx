@@ -1,14 +1,14 @@
 import Form from 'react-bootstrap/Form';
-import React, { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 import { useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-import { PostUsuarioLocalStorage } from "../../logic/localStorage";
-import { Toast, mostrarErrorToast } from '../common/Toast';
-import { registroApi } from "../../services/registroApi";
 import { loginApi } from "../../services/loginApi";
 import { citiesApi } from "../../services/citiesApi";
-import { Link } from "react-router-dom";
+import { registroApi } from "../../services/registroApi";
+import { Toast, mostrarErrorToast } from '../common/Toast';
 import { useCargarDeptos } from '../../logic/useCargarDeptos';
+import { PostUsuarioLocalStorage } from "../../logic/localStorage";
 
 export const Registro = () => {
   useCargarDeptos();
@@ -33,7 +33,6 @@ export const Registro = () => {
       mostrarErrorToast('Rellene todos los campos');
       return;
     }
-    
     try {
       await registroApi(formRegistro);
       const response = await loginApi({ user, password });
@@ -84,7 +83,7 @@ export const Registro = () => {
             value={formRegistro.depto}
           >
             <option value="">Seleccioná tu departamento</option>
-            {deptos.map((d) => (
+            {deptos?.map((d) => (
               <option key={d.id} value={d.id}>{d.nombre}</option>
             ))}
           </Form.Select>
